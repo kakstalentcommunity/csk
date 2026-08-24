@@ -1,0 +1,305 @@
+/* =========================================================================
+   CSK — Design tokens
+   Palette: deep-register navy, cool paper, crest gold, acacia green.
+   Signature: the "Society Register" ledger strip — a hairline rule with a
+   mono index number, used anywhere the content really is an indexed entry
+   (corporate members, award years, affiliate bodies).
+   ========================================================================= */
+:root {
+  --ink:      #101b33;
+  --ink-2:    #1b2a4a;
+  --paper:    #f4f6f8;
+  --paper-2:  #ffffff;
+  --gold:     #c9932e;
+  --gold-dim: #e7c377;
+  --acacia:   #2f6f4e;
+  --line:     #d8dee6;
+  --charcoal: #262b33;
+  --muted:    #5b6472;
+
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+
+  --radius: 2px;
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--body);
+  color: var(--charcoal);
+  background: var(--paper);
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0 0 .4em; color: var(--ink); }
+h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; }
+h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+p { margin: 0 0 1em; color: var(--charcoal); }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* --- Header / nav ------------------------------------------------------- */
+.site-header {
+  background: var(--ink);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 3px solid var(--gold);
+}
+.site-header .bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  gap: 24px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: #fff;
+}
+.brand .crest {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--gold), var(--gold-dim));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-weight: 700; color: var(--ink);
+  font-size: .8rem;
+  flex-shrink: 0;
+}
+.brand .name { font-family: var(--display); font-size: 1.1rem; line-height: 1.15; }
+.brand .since { display: block; font-family: var(--mono); font-size: .68rem; color: var(--gold-dim); letter-spacing: .08em; }
+
+nav.primary { display: flex; gap: 2px; }
+nav.primary a {
+  text-decoration: none;
+  color: #dfe4ec;
+  font-size: .9rem;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  transition: background .15s, color .15s;
+}
+nav.primary a:hover, nav.primary a.active { background: rgba(255,255,255,.08); color: #fff; }
+
+.nav-toggle { display: none; background: none; border: 1px solid rgba(255,255,255,.3); color: #fff; padding: 8px 10px; border-radius: var(--radius); }
+
+@media (max-width: 860px) {
+  nav.primary { display: none; flex-direction: column; width: 100%; padding-bottom: 10px; }
+  nav.primary.open { display: flex; }
+  .site-header .bar { flex-wrap: wrap; }
+  .nav-toggle { display: block; }
+}
+
+/* --- Hero / register strip ----------------------------------------------- */
+.hero {
+  background: linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+  color: #fff;
+  padding: 64px 0 0;
+}
+.hero .wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: end; padding-bottom: 40px; }
+.hero h1 { color: #fff; }
+.hero p.lede { color: #c7cfdd; max-width: 46ch; font-size: 1.05rem; }
+
+.register-strip {
+  display: flex;
+  background: var(--paper-2);
+  color: var(--charcoal);
+  border-top: 1px solid var(--line);
+}
+.register-strip .cell {
+  flex: 1;
+  padding: 20px 24px;
+  border-right: 1px solid var(--line);
+}
+.register-strip .cell:last-child { border-right: none; }
+.register-strip .cell .num { font-family: var(--mono); font-size: 1.5rem; color: var(--ink); display: block; }
+.register-strip .cell .label { font-family: var(--mono); font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .register-strip { flex-direction: column; }
+  .register-strip .cell { border-right: none; border-bottom: 1px solid var(--line); }
+}
+
+/* --- Ledger entries (signature element) ---------------------------------- */
+.ledger { border-top: 1px solid var(--line); }
+.ledger-entry {
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ledger-entry .idx {
+  font-family: var(--mono);
+  font-size: .8rem;
+  color: var(--gold);
+  min-width: 3.4em;
+  flex-shrink: 0;
+}
+.ledger-entry .content { flex: 1; }
+.ledger-entry .content .title { font-weight: 600; color: var(--ink); }
+.ledger-entry .content .meta { font-size: .85rem; color: var(--muted); }
+
+/* --- Sections / cards ------------------------------------------------------ */
+section.block { padding: 56px 0; }
+section.block.alt { background: var(--paper-2); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 860px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.card .eyebrow { display: block; margin-bottom: 8px; }
+
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .82rem;
+  letter-spacing: .04em;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 600;
+  transition: background .15s;
+}
+.btn:hover { background: var(--gold-dim); }
+.btn.ghost {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.4);
+}
+.btn.ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* --- Member roll / chips --------------------------------------------------- */
+.chip-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  padding: 8px 14px;
+  font-size: .88rem;
+  border-radius: var(--radius);
+}
+
+/* --- Sidebar / two-col page layout ----------------------------------------- */
+.page-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; padding: 48px 0 72px; }
+.sidebar h3 { font-size: .95rem; text-transform: uppercase; letter-spacing: .06em; font-family: var(--mono); color: var(--muted); }
+.sidebar ul { list-style: none; padding: 0; margin: 0 0 28px; }
+.sidebar li a {
+  display: block;
+  text-decoration: none;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: .92rem;
+}
+.sidebar li a:hover { color: var(--gold); }
+@media (max-width: 860px) { .page-layout { grid-template-columns: 1fr; } }
+
+/* --- Footer ---------------------------------------------------------------- */
+.site-footer { background: var(--ink); color: #c7cfdd; padding: 48px 0 24px; margin-top: 40px; }
+.site-footer .grid-3 { margin-bottom: 32px; }
+.site-footer h3 { color: #fff; font-family: var(--mono); font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; }
+.site-footer a { text-decoration: none; color: #c7cfdd; font-size: .9rem; }
+.site-footer a:hover { color: var(--gold); }
+.site-footer .bottom {
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 20px;
+  font-size: .8rem;
+  color: #8b95a5;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* --- Static-site page helpers ------------------------------------------- */
+.standard-page { padding: 48px 24px 72px; }
+.news-page { max-width: 820px; padding: 48px 24px 72px; }
+.narrow { max-width: 760px; }
+.home-columns { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; padding-top: 0; padding-bottom: 0; }
+.top-space { margin-top: 16px; }
+.benefit-heading { font-size: 1.1rem; margin-top: 32px; }
+.contact-card { max-width: 420px; }
+.contact-card p:last-child { margin-bottom: 0; }
+.card-copy { margin-top: 12px; font-size: .92rem; }
+.photo-placeholder { aspect-ratio: 4 / 3; background: linear-gradient(160deg, #1b2a4a, #101b33); border-radius: var(--radius); margin-bottom: 12px; }
+.gallery-caption { margin-bottom: 4px; font-weight: 600; color: var(--ink); }
+.gallery-date, .hint { color: var(--muted); font-size: .85rem; }
+.hint { margin-top: 20px; font-size: .9rem; }
+.news-entry { display: block; }
+.news-entry .content { margin-top: 8px; }
+.news-entry .title { font-size: 1.15rem; }
+.news-entry p { margin-top: 10px; }
+@media (max-width: 860px) { .home-columns { grid-template-columns: 1fr; } }
+
+/* =========================================================================
+   Legacy CSK presentation — faithfully styled from the provided reference.
+   ========================================================================= */
+:root { --blue:#25356d; --blue-light:#6674a4; --gold:#f4c92d; --page-width:970px; }
+html { background:#f8f8f8; }
+body { font-family:Arial, Helvetica, sans-serif; background:linear-gradient(#fff 0 155px,#f7f7f7 155px); font-size:13px; color:#252525; line-height:1.2; }
+.wrap { max-width:var(--page-width); padding-left:10px; padding-right:10px; }
+.site-header { position:relative; z-index:40; background:transparent; border:0; box-shadow:none; }
+.site-top { height:74px; background:linear-gradient(180deg,#192a63,#63709d); border-bottom:3px solid #d0d0d0; }
+.masthead { height:74px; position:relative; padding-left:138px; display:flex; align-items:center; justify-content:space-between; }
+.brand { color:#fff; gap:0; text-decoration:none; }
+.brand .crest { position:absolute; left:0; top:0; width:118px; height:126px; z-index:3; background:#fff; border:1px solid #dedede; border-top:0; display:grid; place-items:center; color:#ae1010; font-family:Georgia,serif; font-size:23px; text-shadow:1px 1px #f5cf29; }
+.brand .crest:before { content:""; position:absolute; width:52px; height:76px; border:5px solid #b31016; border-radius:6px 6px 25px 25px; background:linear-gradient(135deg,#fff 45%,#163d84 46% 56%,#fff 57%); box-shadow:0 0 0 3px #f2c223; }
+.brand .crest i,.brand .crest b { position:relative; z-index:1; font-style:normal; font-size:12px; }
+.brand .crest i { transform:translateY(-23px); }.brand .crest b { transform:translateY(23px); color:#1c3169; text-shadow:none; }
+.brand .name { font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:23px; letter-spacing:.2px; }.brand .since { color:#e6e8f1; font-size:12px; letter-spacing:0; margin-top:7px; font-family:Arial,Helvetica,sans-serif; }
+.header-tools { align-self:stretch; padding-top:7px; width:194px; text-align:left; }.header-tools input { width:192px; height:22px; border:1px solid #b9b9b9; padding:2px 6px; font-size:11px; }.header-tools p { color:white; margin:19px 0 0 7px; white-space:nowrap; font-size:12px; }.header-tools a { color:#fff; font-weight:bold; }
+.nav-wrap { height:66px; padding-left:138px; position:relative; }
+nav.primary { display:flex; height:32px; width:828px; gap:0; background:linear-gradient(#3d3d3d,#0d0d0d); border:1px solid #4d4d4d; border-radius:6px; overflow:visible !important; }
+nav.primary > a, .nav-item > a { display:block; min-width:101px; padding:8px 17px; border-right:1px solid #4b4b4b; color:#e7e7e7; font-size:14px; text-align:center; text-decoration:none; text-transform:uppercase; white-space:nowrap; }
+nav.primary > a:first-child { border-radius:5px 0 0 5px; }.nav-item > a { min-width:126px; }.nav-item:last-of-type > a { min-width:120px; }.nav-item { position:relative; flex:0 0 auto; }
+nav.primary > a:hover, .nav-item:hover > a, nav.primary .active { color:var(--gold); background:linear-gradient(#505050,#202020); }
+.subnav { display:none; position:absolute; top:32px; left:0; width:280px; min-width:280px; padding:2px 0; background:linear-gradient(#484848,#151515); border-radius:0 0 4px 4px; box-shadow:0 3px 5px #777; z-index:100; }
+.nav-item:hover .subnav, .nav-item:focus-within .subnav, .nav-item.expanded .subnav { display:block; }nav.primary .subnav a { display:block; width:100%; padding:8px 14px 8px 30px; color:#e7e7e7; font-size:14px; line-height:18px; text-align:left; text-decoration:none; border-bottom:1px dotted #747474; position:relative; white-space:normal; }.subnav a:before { content:""; position:absolute; left:14px; top:13px; width:7px; height:7px; border-radius:50%; background:#777; }.subnav a:hover { color:var(--gold); }.awards-menu { width:280px; }
+.nav-toggle { display:none; }
+main { width:var(--page-width); margin:0 auto; background:#fff; box-shadow:0 0 7px #ddd; padding-bottom:20px; }
+.legacy-slider { width:950px; height:290px; margin:0 auto 12px; padding:9px; border:1px solid #ececec; background:#fff; position:relative; }
+.legacy-slide { height:100%; background:linear-gradient(20deg,rgba(13,20,48,.5),transparent 48%),linear-gradient(135deg,#d3b28a,#3b4f3d 45%,#d1be93); display:flex; align-items:flex-end; justify-content:center; overflow:hidden; position:relative; }
+.legacy-slide:before { content:""; position:absolute; inset:0; opacity:.45; background:repeating-linear-gradient(110deg,transparent 0 38px,rgba(255,255,255,.8) 39px 43px),linear-gradient(0deg,rgba(255,255,255,.45),transparent 45%); }
+.legacy-slide strong { z-index:1; width:100%; text-align:center; padding:9px; font:bold italic 22px Georgia,serif; color:#fff; text-shadow:1px 2px 2px #222; background:rgba(12,16,26,.35); }
+.slider-pages { position:absolute; right:18px; bottom:18px; z-index:2; display:flex; gap:2px; }.slider-pages b { color:#fff; background:#333; padding:2px 5px; font-size:10px; }.slider-pages b:first-child { background:#e49d00; }
+.page-layout { grid-template-columns:288px 1fr; gap:0; padding:0 10px 30px; }.sidebar { padding:6px 10px 0 0; }.sidebar h3 { color:#3d4f80; font-family:Arial,sans-serif; font-size:19px; font-weight:normal; border-bottom:1px dotted #65708d; padding-bottom:1px; text-transform:uppercase; }.sidebar li a { color:#b00000; font-size:13px; font-weight:bold; padding:5px 8px; background:#e1e3f0; border-bottom:1px solid #fff; }.sidebar li a:hover { color:#f19700; }
+.page-layout > div { border-left:9px solid #48598e; padding:0 16px; min-height:440px; }.page-layout h1, .standard-page h1, .news-page h1 { font: bold 21px Arial,sans-serif; text-transform:uppercase; color:#d77b17; border-bottom:1px dotted #61708b; padding-bottom:3px; margin:0 0 3px; }.eyebrow { display:none; } p { font-size:13px; line-height:1.18; }
+.ledger { border:0; }.ledger-entry { padding:5px 0; gap:9px; border:0; }.ledger-entry .idx { color:#67a9c9; font:12px Arial,sans-serif; min-width:18px; }.ledger-entry .idx:before { content:"•"; }.ledger-entry .content .title { font-weight:bold; color:#222; }.ledger-entry .content .meta { font-size:12px; }
+.benefit-heading { font:bold 14px Arial,sans-serif; margin:11px 0 3px; color:#292929; }.chip-grid { display:block; }.chip { display:block; border:0; background:transparent; padding:2px 0 2px 15px; border-radius:0; font-size:12px; position:relative; }.chip:before { content:"▪"; position:absolute; left:3px; color:#5ba2c7; }.standard-page,.news-page { padding:10px 26px 35px; }.standard-page h1,.news-page h1 { margin-top:0; }.grid-3 { grid-template-columns:repeat(3,1fr); gap:12px; }.card { border:1px solid #ddd; padding:12px; border-radius:0; }.site-footer { width:var(--page-width); margin:0 auto; padding:12px 6px; background:#fff; color:#5b6180; box-shadow:0 -3px 8px #ddd; }.site-footer .grid-3 { display:none; }.site-footer .bottom { color:#5b6180; border-top:1px solid #ddd; padding-top:10px; font-size:11px; }.site-footer .bottom:before { content:"Computer Society of Kenya is proud to be affiliate member of:  APSEA     ICC     KEPSA     WITSA     FICTA"; position:absolute; margin-top:-37px; left:50%; transform:translateX(-50%); white-space:pre; color:#485681; font-size:11px; }.site-footer .bottom { margin-top:46px; position:relative; }
+@media (max-width: 860px) { body { background:#fff; }.site-top,.masthead { height:auto; }.masthead { padding:10px 10px 10px 82px; }.brand .crest { width:70px; height:80px; }.brand .name { font-size:16px; }.header-tools { display:none; }.nav-wrap { height:auto; padding:0 10px; }.nav-toggle { display:block; margin:7px 0; }.primary { flex-direction:column; }.primary:not(.open) { display:none; } nav.primary { height:auto; width:100%; }.nav-item,.nav-item > a,nav.primary > a { width:100%; min-width:0; }.subnav { position:static; width:100%; min-width:0; box-shadow:none; }.nav-item:hover .subnav { display:none; }.nav-item.expanded .subnav,.nav-item:focus-within .subnav { display:block; } main,.site-footer { width:100%; box-shadow:none; }.legacy-slider { width:100%; height:180px; }.page-layout { grid-template-columns:1fr; }.page-layout > div { border-left:0; padding:14px 0; }.sidebar { padding:0; }.site-footer .bottom:before { display:none; }.site-footer .bottom { margin-top:0; } }
+
+@media (max-width: 380px) { .masthead { padding-left:72px; }.brand .crest { width:60px; height:70px; }.brand .name { font-size:14px; }.brand .since { font-size:10px; } }
+
+/* --- Utility ---------------------------------------------------------------- */
+.badge-affiliate {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line); padding: 8px 14px; border-radius: var(--radius);
+  font-size: .85rem; background: var(--paper-2);
+}
